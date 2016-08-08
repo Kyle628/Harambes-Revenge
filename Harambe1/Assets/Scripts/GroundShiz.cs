@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GroundShiz : MonoBehaviour {
 
-	public GameObject moreGround;
+	public GameObject moreGrounds;
 	private float initGround = .01f;
 
 
