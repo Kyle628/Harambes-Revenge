@@ -7,6 +7,8 @@ public class PlayerBehavior : MonoBehaviour {
     public float speed = 2;
     public float jumpForce = 1;
     public float rotateSpeed = 1000;
+	public bool grounded = true;
+	public bool doubleJump = false;
 
     public Rigidbody2D rb;
 
@@ -28,10 +30,17 @@ public class PlayerBehavior : MonoBehaviour {
 
     void jump()
     {
-        if(Input.GetButtonDown("Jump"))
+		if(Input.GetButtonDown("Jump") && (grounded))
         {
             rb.AddForce((Vector2.up + Vector2.right) * jumpForce);
             transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
-        }
+			grounded = false;
+		} else if (Input.GetButtonDown("Jump") && (!doubleJump))
+		{
+			rb.velocity = new Vector3(rb.velocity.x, 0, 0);
+			rb.AddForce((Vector2.up + Vector2.right) * jumpForce);
+			transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+			doubleJump = true;
+		}
     }
 }
