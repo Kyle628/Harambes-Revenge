@@ -25,6 +25,7 @@ public class PlayerBehavior : MonoBehaviour {
 
     void move()
     {
+
         transform.Translate(Vector3.right * Time.deltaTime * speed);
     }
 
@@ -43,4 +44,14 @@ public class PlayerBehavior : MonoBehaviour {
 			doubleJump = true;
 		}
     }
+
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.tag == "Ground") {
+			grounded = true;
+			doubleJump = false;
+			rb.velocity = new Vector3(0, 0, 0);
+			//move ();
+		}
+
+	}
 }
