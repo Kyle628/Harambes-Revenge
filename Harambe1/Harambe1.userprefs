@@ -1,9 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GroundShiz.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerBehavior.cs">
     <Files>
-      <File FileName="Assets/Scripts/GroundShiz.cs" Line="10" Column="79" />
-      <File FileName="Assets/Scripts/PlayerBehavior.cs" Line="17" Column="42" />
+      <File FileName="Assets/Scripts/PlayerBehavior.cs" Line="38" Column="15" />
+      <File FileName="Assets/Scripts/GroundShiz.cs" Line="23" Column="3" />
+      <File FileName="Assets/Scripts/Scroll.cs" Line="26" Column="91" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
