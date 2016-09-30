@@ -29,8 +29,6 @@ public class BabyController : MonoBehaviour {
 		rb.AddForce(Random.Range( .1f, .9f ) * Vector3.down);
 		transform.Rotate(Vector3.right * 2f);
 
-		Debug.Log (rb.velocity.y);
-
 
 		return;
 
