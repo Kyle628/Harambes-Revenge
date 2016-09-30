@@ -7,7 +7,6 @@ public class GroundShiz : MonoBehaviour {
 	public GameObject moreGround;
 
 
-
 	//hiiiiiiiiiiiii
 
 
