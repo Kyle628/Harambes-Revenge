@@ -23,7 +23,7 @@ public class BabyController : MonoBehaviour {
 		GameObject Baby = GameObject.Find("Baby");
 
 
-		moreBaby = (GameObject)Instantiate(Baby, new Vector3(Player.transform.position.x + Random.Range( 30.0f, 55.0f ), 10.0f, 0), Quaternion.identity);
+		moreBaby = (GameObject)Instantiate(Resources.Load("Baby"), new Vector3(Player.transform.position.x + Random.Range( 30.0f, 55.0f ), 10.0f, 0), Quaternion.identity);
 		Rigidbody2D rb = moreBaby.GetComponent<Rigidbody2D>();
 
 		rb.AddForce(Random.Range( .1f, .9f ) * Vector3.down);
@@ -31,13 +31,11 @@ public class BabyController : MonoBehaviour {
 
 
 		return;
-
-
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "Ground") {
-			Destroy (moreBaby);
+			Destroy (gameObject);
 		}
 
 	}
