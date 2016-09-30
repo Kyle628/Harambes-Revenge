@@ -50,7 +50,7 @@ public class PlayerBehavior : MonoBehaviour {
 		if (other.tag == "Ground") {
 			grounded = true;
 			doubleJump = false;
-			rb.velocity = new Vector3(0, 0, 0);
+			//rb.velocity = new Vector3(0, 0, 0);
 			//move ();
 		}
 
