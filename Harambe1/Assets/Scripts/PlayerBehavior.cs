@@ -15,6 +15,9 @@ public class PlayerBehavior : MonoBehaviour {
 	public bool doubleJump = false;
 	private SpriteRenderer SpriteRenderer;
 	private int frame = 0;
+	public Vector3 downForce;
+	public bool shouldBlink;
+	public int numBlinks;
 
     public Rigidbody2D rb;
 
@@ -30,10 +33,14 @@ public class PlayerBehavior : MonoBehaviour {
 		frame++;
 		if (frame % 10 == 0) {
 			ChangeSprite ();
+			//SpriteRenderer.color = new Color(255, 255, 255);
+			Blink();
 		}
         move();
         jump();
-		//hangtime ();
+		dash ();
+
+
 	}
 		
 
@@ -43,35 +50,29 @@ public class PlayerBehavior : MonoBehaviour {
     }
 
     void jump()
-    {
-		if(Input.GetButtonDown("Jump") && (grounded))
-        {
-			rb.AddForce(new Vector2(0f, jumpForce));
-			rb.AddForce(new Vector2(.1f, 0f));
-            //transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+	{
+		if (Input.GetButtonDown ("Jump") && (grounded)) {
+			rb.AddForce (new Vector2 (0f, jumpForce));
+			rb.AddForce (new Vector2 (.1f, 0f));
+			//transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
 			grounded = false;
-		} else if (Input.GetButtonDown("Jump") && (!doubleJump))
-		{
-			rb.velocity = new Vector3(rb.velocity.x, 0, 0);
-			rb.AddForce(new Vector2(0f, jumpForce));
-			rb.AddForce(new Vector2(.1f, 0f));
+		} else if (Input.GetButtonDown ("Jump") && (!doubleJump)) {
+			rb.velocity = new Vector3 (rb.velocity.x, 0, 0);
+			rb.AddForce (new Vector2 (0f, jumpForce));
+			rb.AddForce (new Vector2 (.1f, 0f));
 			//transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
 			doubleJump = true;
 		}
 
-    }
-		
-	/*
-	void hangtime()
-	{
-		
-	if (Input.GetButton("Jump")) {
-		rb.AddForce(new Vector2(1f, 0f));
 	}
 
-	return;
+	void dash() {
+		if (Input.GetButtonDown ("Dash")) {
+			transform.Translate (Vector3.right * 2f);
+		}
+	}
+		
 
-	}*/
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "Ground") {
@@ -79,6 +80,12 @@ public class PlayerBehavior : MonoBehaviour {
 			doubleJump = false;
 			//rb.velocity = new Vector3(0, 0, 0);
 			//move ();
+		}
+
+		if (other.tag == "Baby") {
+			shouldBlink = true;
+			SpriteRenderer.color = Color.red;
+
 		}
 
 	}
@@ -90,5 +97,26 @@ public class PlayerBehavior : MonoBehaviour {
 			SpriteRenderer.sprite = sprite1;
 		}
 
+	}
+
+	void Blink() {
+		if (shouldBlink) {
+			if (numBlinks < 5) {
+				SwitchColor ();
+				numBlinks++;
+			} else {
+
+				shouldBlink = false;
+				numBlinks = 0;
+			}
+		}
+	}
+
+	void SwitchColor() {
+		if (SpriteRenderer.color == Color.red) {
+			SpriteRenderer.color = Color.white;
+		} else {
+			SpriteRenderer.color = Color.red;
+		}
 	}
 }
