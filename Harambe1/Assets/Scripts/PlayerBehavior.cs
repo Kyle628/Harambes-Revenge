@@ -6,6 +6,8 @@ public class PlayerBehavior : MonoBehaviour {
 
 	public Sprite sprite1;
 	public Sprite sprite2;
+	public Sprite sprite3;
+	public Sprite sprite4;
 
     public float speed = 2;
 	public float maxSpeed = 2;
@@ -18,13 +20,18 @@ public class PlayerBehavior : MonoBehaviour {
 	public Vector3 downForce;
 	public bool shouldBlink;
 	public int numBlinks;
+	public int health;
+	public bool crazedHarambe = false;
 
     public Rigidbody2D rb;
+
+	public bool gameOver = false;
 
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D>();
 		SpriteRenderer = GetComponent<SpriteRenderer>();
+
 
     }
 	
@@ -39,7 +46,9 @@ public class PlayerBehavior : MonoBehaviour {
         move();
         jump();
 		dash ();
-
+		if (gameOver) {
+			Application.Quit ();
+		}
 
 	}
 		
@@ -85,14 +94,32 @@ public class PlayerBehavior : MonoBehaviour {
 		if (other.tag == "Baby") {
 			shouldBlink = true;
 			SpriteRenderer.color = Color.red;
+			health -= 10;
+			if (health < 0) {
+				gameOver = true;
+			}
+
+		}
+
+		if (other.tag == "Tranq") {
+			Debug.Log ("harambe down");
+			Time.timeScale = 2;
+			crazedHarambe = true;
 
 		}
 
 	}
 
 	void ChangeSprite() {
-		if (SpriteRenderer.sprite == sprite1) {
+		if (SpriteRenderer.sprite == sprite1 && !crazedHarambe) {
 			SpriteRenderer.sprite = sprite2;
+		} else if (crazedHarambe) {
+			if (SpriteRenderer.sprite == sprite3) {
+				SpriteRenderer.sprite = sprite4;
+			} else {
+				SpriteRenderer.sprite = sprite3;
+			}
+
 		} else {
 			SpriteRenderer.sprite = sprite1;
 		}
