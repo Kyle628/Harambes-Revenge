@@ -23,7 +23,7 @@ public class Scroll : MonoBehaviour {
 	public void SpawnBackground()
 	{
 		GameObject backGround = GameObject.Find("Background");
-		moreBackground = (GameObject)Instantiate(backGround, transform.position + new Vector3(25, 0, 0), Quaternion.identity);
+		moreBackground = (GameObject)Instantiate(backGround, transform.position + new Vector3(15f, 0, 0), Quaternion.identity);
 
 		return;
 

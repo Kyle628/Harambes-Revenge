@@ -9,6 +9,10 @@ public class PlayerBehavior : MonoBehaviour {
 	public Sprite sprite3;
 	public Sprite sprite4;
 
+	public Sprite healthSprite;
+	public Sprite healthSprite2;
+	public Sprite healthSprite3;
+
     public float speed = 2;
 	public float maxSpeed = 2;
     public float jumpForce = 3f;
@@ -20,17 +24,23 @@ public class PlayerBehavior : MonoBehaviour {
 	public Vector3 downForce;
 	public bool shouldBlink;
 	public int numBlinks;
-	public int health;
+	public int health = 30;
 	public bool crazedHarambe = false;
 
     public Rigidbody2D rb;
 
 	public bool gameOver = false;
 
+	private SpriteRenderer HealthSpriteRenderer;
+
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D>();
 		SpriteRenderer = GetComponent<SpriteRenderer>();
+
+		GameObject Health = GameObject.Find("Health");
+		HealthSpriteRenderer = Health.GetComponent<SpriteRenderer>();
+
 
 
     }
@@ -47,7 +57,7 @@ public class PlayerBehavior : MonoBehaviour {
         jump();
 		dash ();
 		if (gameOver) {
-			Application.Quit ();
+			Application.LoadLevel(Application.loadedLevel);
 		}
 
 	}
@@ -92,11 +102,23 @@ public class PlayerBehavior : MonoBehaviour {
 		}
 
 		if (other.tag == "Baby") {
-			shouldBlink = true;
-			SpriteRenderer.color = Color.red;
-			health -= 10;
-			if (health < 0) {
-				gameOver = true;
+			if (!crazedHarambe) {
+				shouldBlink = true;
+				SpriteRenderer.color = Color.red;
+				health -= 10;
+				if (health == 20) {
+					HealthSpriteRenderer.sprite = healthSprite2;
+				} else if (health == 10) {
+					HealthSpriteRenderer.sprite = healthSprite3;
+				}
+				if (health <= 0) {
+					gameOver = true;
+				}
+			}
+			else {
+				crazedHarambe = false;
+				Time.timeScale = 1;
+
 			}
 
 		}
