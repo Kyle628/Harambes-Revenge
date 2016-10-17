@@ -57,7 +57,7 @@ public class PlayerBehavior : MonoBehaviour {
         jump();
 		dash ();
 		if (gameOver) {
-			Application.LoadLevel(Application.loadedLevel);
+			Application.LoadLevel("home");
 		}
 
 	}
