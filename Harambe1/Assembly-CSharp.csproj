@@ -45,10 +45,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BackgroundScroller.cs" />
+     <Compile Include="Assets\Scripts\BabyController.cs" />
+     <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\GroundShiz.cs" />
      <Compile Include="Assets\Scripts\PlayerBehavior.cs" />
      <Compile Include="Assets\Scripts\Scroll.cs" />
+     <Compile Include="Assets\Scripts\SkyScraperController.cs" />
+     <Compile Include="Assets\Scripts\TranqController.cs" />
+     <Compile Include="Assets\Scripts\scoreCount.cs" />
+     <Compile Include="Assets\Scripts\startGame.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
