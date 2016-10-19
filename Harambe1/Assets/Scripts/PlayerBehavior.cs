@@ -47,6 +47,9 @@ public class PlayerBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (gameOver == true) {
+			Application.LoadLevel(0);
+		}
 		frame++;
 		if (frame % 10 == 0) {
 			ChangeSprite ();
@@ -56,9 +59,7 @@ public class PlayerBehavior : MonoBehaviour {
         move();
         jump();
 		dash ();
-		if (gameOver) {
-			Application.LoadLevel("home");
-		}
+
 
 	}
 		
