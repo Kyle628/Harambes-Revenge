@@ -6,6 +6,7 @@ public class BabyController : MonoBehaviour {
 	public GameObject moreBaby;
 	private int frame = 0;
 	private SpriteRenderer SpriteRenderer;
+	public Sprite sprite2;
 
 
 
@@ -42,7 +43,14 @@ public class BabyController : MonoBehaviour {
 		}
 
 		if (other.tag == "Player") {
-			Destroy (gameObject);
+			GameObject Player = GameObject.Find("gorilla");
+			PlayerBehavior pScript = Player.GetComponent<PlayerBehavior> ();
+			if (pScript.crazedHarambe) {
+				pScript.crazedHarambe = false;
+				SpriteRenderer.sprite = sprite2;
+			} else {
+				Destroy (gameObject);
+			}
 		}
 
 	}

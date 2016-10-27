@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\Scroll.cs" />
      <Compile Include="Assets\Scripts\SkyScraperController.cs" />
      <Compile Include="Assets\Scripts\TranqController.cs" />
+     <Compile Include="Assets\Scripts\churros.cs" />
      <Compile Include="Assets\Scripts\scoreCount.cs" />
      <Compile Include="Assets\Scripts\startGame.cs" />
  <Reference Include="UnityEngine.UI">

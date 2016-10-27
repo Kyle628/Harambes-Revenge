@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 
 public class PlayerBehavior : MonoBehaviour {
@@ -13,9 +14,9 @@ public class PlayerBehavior : MonoBehaviour {
 	public Sprite healthSprite2;
 	public Sprite healthSprite3;
 
-    public float speed = 2;
+    public float speed = 10;
 	public float maxSpeed = 2;
-    public float jumpForce = 3f;
+    public float jumpForce = 600f;
     public float rotateSpeed = 1000;
 	public bool grounded = true;
 	public bool doubleJump = false;
@@ -33,6 +34,9 @@ public class PlayerBehavior : MonoBehaviour {
 
 	private SpriteRenderer HealthSpriteRenderer;
 
+	private int score;
+	public Text scoreText;
+
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D>();
@@ -40,6 +44,8 @@ public class PlayerBehavior : MonoBehaviour {
 
 		GameObject Health = GameObject.Find("Health");
 		HealthSpriteRenderer = Health.GetComponent<SpriteRenderer>();
+		score = 0;
+		scoreText.text = score.ToString ();
 
 
 
@@ -100,6 +106,8 @@ public class PlayerBehavior : MonoBehaviour {
 			doubleJump = false;
 			//rb.velocity = new Vector3(0, 0, 0);
 			//move ();
+			score += 1;
+			scoreText.text = score.ToString();
 		}
 
 		if (other.tag == "Baby") {
@@ -117,7 +125,7 @@ public class PlayerBehavior : MonoBehaviour {
 				}
 			}
 			else {
-				crazedHarambe = false;
+				//crazedHarambe = false;
 				Time.timeScale = 1;
 
 			}

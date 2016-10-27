@@ -10,7 +10,7 @@ public class TranqController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		SpriteRenderer = GetComponent<SpriteRenderer>();
-		InvokeRepeating("SpawnTranq", 1f, 9999999999999999f);
+		InvokeRepeating("SpawnTranq", 30f, 9999999999999999f);
 	
 	}
 	
