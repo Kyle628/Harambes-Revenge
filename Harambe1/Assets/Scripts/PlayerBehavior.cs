@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 
 public class PlayerBehavior : MonoBehaviour {
@@ -13,13 +14,12 @@ public class PlayerBehavior : MonoBehaviour {
 	public Sprite healthSprite2;
 	public Sprite healthSprite3;
 
-    public float speed = 15.0f;
-	public float maxSpeed = 2f;
-    public float jumpForce = 3f;
-    public float rotateSpeed = 1000;
+	public float speed = 10;
+	public float maxSpeed = 2;
+	public float jumpForce = 600f;
+	public float rotateSpeed = 1000;
 	public bool grounded = true;
 	public bool doubleJump = false;
-	public bool dashing = false;
 	private SpriteRenderer SpriteRenderer;
 	private int frame = 0;
 	public Vector3 downForce;
@@ -28,16 +28,16 @@ public class PlayerBehavior : MonoBehaviour {
 	public int health = 30;
 	public bool crazedHarambe = false;
 
-    public Rigidbody2D rb;
+	public Rigidbody2D rb;
 
 	public bool gameOver = false;
 
 	private SpriteRenderer HealthSpriteRenderer;
-	private IEnumerator coroutine;
 
-    // Use this for initialization
-    void Start () {
-        rb = GetComponent<Rigidbody2D>();
+
+	// Use this for initialization
+	void Start () {
+		rb = GetComponent<Rigidbody2D>();
 		SpriteRenderer = GetComponent<SpriteRenderer>();
 
 		GameObject Health = GameObject.Find("Health");
@@ -46,9 +46,8 @@ public class PlayerBehavior : MonoBehaviour {
 
 
 
+	}
 
-    }
-	
 	// Update is called once per frame
 	void Update () {
 		if (gameOver == true) {
@@ -60,25 +59,22 @@ public class PlayerBehavior : MonoBehaviour {
 			//SpriteRenderer.color = new Color(255, 255, 255);
 			Blink();
 		}
-
-		dash();
 		move();
-        jump();
-
+		jump();
+		dash ();
 
 
 	}
-		
 
-    void move()
-    {
-        transform.Translate(Vector3.right * Time.deltaTime * speed);
-    }
 
-    void jump()
+	void move()
+	{
+		transform.Translate(Vector3.right * Time.deltaTime * speed);
+	}
+
+	void jump()
 	{
 		if (Input.GetButtonDown ("Jump") && (grounded)) {
-			dashing = true;
 			rb.AddForce (new Vector2 (0f, jumpForce));
 			rb.AddForce (new Vector2 (.1f, 0f));
 			//transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
@@ -93,20 +89,12 @@ public class PlayerBehavior : MonoBehaviour {
 
 	}
 
-	void dash() 
-	{
+	void dash() {
 		if (Input.GetButtonDown ("Dash")) {
-			dashing = true;
-			coroutine = doDash();
-			StartCoroutine(coroutine);
+			transform.Translate (Vector3.right * 2f);
 		}
 	}
 
-	private IEnumerator doDash(){
-		speed = 50.0f;
-		yield return new WaitForSeconds (.2f);
-		speed = 15.0f;
-	}
 
 
 	void OnTriggerEnter2D(Collider2D other) {
@@ -121,7 +109,7 @@ public class PlayerBehavior : MonoBehaviour {
 			if (!crazedHarambe) {
 				shouldBlink = true;
 				SpriteRenderer.color = Color.red;
-				health -= 10;
+				//health -= 10;
 				if (health == 20) {
 					HealthSpriteRenderer.sprite = healthSprite2;
 				} else if (health == 10) {
@@ -132,7 +120,7 @@ public class PlayerBehavior : MonoBehaviour {
 				}
 			}
 			else {
-				crazedHarambe = false;
+				//crazedHarambe = false;
 				Time.timeScale = 1;
 
 			}
