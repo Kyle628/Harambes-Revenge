@@ -13,12 +13,13 @@ public class PlayerBehavior : MonoBehaviour {
 	public Sprite healthSprite2;
 	public Sprite healthSprite3;
 
-    public float speed = 2;
-	public float maxSpeed = 2;
+    public float speed = 15.0f;
+	public float maxSpeed = 2f;
     public float jumpForce = 3f;
     public float rotateSpeed = 1000;
 	public bool grounded = true;
 	public bool doubleJump = false;
+	public bool dashing = false;
 	private SpriteRenderer SpriteRenderer;
 	private int frame = 0;
 	public Vector3 downForce;
@@ -32,6 +33,7 @@ public class PlayerBehavior : MonoBehaviour {
 	public bool gameOver = false;
 
 	private SpriteRenderer HealthSpriteRenderer;
+	private IEnumerator coroutine;
 
     // Use this for initialization
     void Start () {
@@ -40,6 +42,8 @@ public class PlayerBehavior : MonoBehaviour {
 
 		GameObject Health = GameObject.Find("Health");
 		HealthSpriteRenderer = Health.GetComponent<SpriteRenderer>();
+
+
 
 
 
@@ -56,9 +60,11 @@ public class PlayerBehavior : MonoBehaviour {
 			//SpriteRenderer.color = new Color(255, 255, 255);
 			Blink();
 		}
-        move();
+
+		dash();
+		move();
         jump();
-		dash ();
+
 
 
 	}
@@ -72,6 +78,7 @@ public class PlayerBehavior : MonoBehaviour {
     void jump()
 	{
 		if (Input.GetButtonDown ("Jump") && (grounded)) {
+			dashing = true;
 			rb.AddForce (new Vector2 (0f, jumpForce));
 			rb.AddForce (new Vector2 (.1f, 0f));
 			//transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
@@ -86,12 +93,20 @@ public class PlayerBehavior : MonoBehaviour {
 
 	}
 
-	void dash() {
+	void dash() 
+	{
 		if (Input.GetButtonDown ("Dash")) {
-			transform.Translate (Vector3.right * 2f);
+			dashing = true;
+			coroutine = doDash();
+			StartCoroutine(coroutine);
 		}
 	}
-		
+
+	private IEnumerator doDash(){
+		speed = 50.0f;
+		yield return new WaitForSeconds (.2f);
+		speed = 15.0f;
+	}
 
 
 	void OnTriggerEnter2D(Collider2D other) {
