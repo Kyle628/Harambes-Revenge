@@ -29,7 +29,7 @@ public class BabyController : MonoBehaviour {
 		moreBaby = (GameObject)Instantiate(Resources.Load("Baby"), new Vector3(Player.transform.position.x + Random.Range( 30.0f, 55.0f ), 10.0f, 0), Quaternion.identity);
 		Rigidbody2D rb = moreBaby.GetComponent<Rigidbody2D>();
 
-		rb.AddForce(Random.Range( .1f, .9f ) * Vector3.down);
+		//rb.AddForce(Random.Range( .1f, .9f ) * Vector3.down);
 		transform.Rotate(Vector3.right * 2f);
 
 
