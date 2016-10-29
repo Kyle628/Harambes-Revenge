@@ -14,6 +14,9 @@ public class PlayerBehavior : MonoBehaviour {
 	public Sprite healthSprite2;
 	public Sprite healthSprite3;
 
+	public bool dashing = false;
+	private IEnumerator coroutine;
+
 	public float speed = 10;
 	public float maxSpeed = 2;
 	public float jumpForce = 600f;
@@ -91,9 +94,18 @@ public class PlayerBehavior : MonoBehaviour {
 
 	void dash() {
 		if (Input.GetButtonDown ("Dash")) {
-			transform.Translate (Vector3.right * 2f);
-		}
+			dashing = true;
+			coroutine = doDash();
+			StartCoroutine(coroutine);
+	    }
 	}
+
+	private IEnumerator doDash(){
+		speed = 50.0f;
+		yield return new WaitForSeconds (.2f);
+		speed = 15.0f;
+	}
+
 
 
 
@@ -109,7 +121,7 @@ public class PlayerBehavior : MonoBehaviour {
 			if (!crazedHarambe) {
 				shouldBlink = true;
 				SpriteRenderer.color = Color.red;
-				//health -= 10;
+				health -= 10;
 				if (health == 20) {
 					HealthSpriteRenderer.sprite = healthSprite2;
 				} else if (health == 10) {

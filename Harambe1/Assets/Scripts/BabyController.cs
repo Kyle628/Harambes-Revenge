@@ -28,15 +28,23 @@ public class BabyController : MonoBehaviour {
 	public IEnumerator SpawnBaby()
 	{
 		Debug.Log ("spawn");
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(Random.Range( 2.0f, 4.0f ));
 		GameObject Player = GameObject.Find("gorilla");
 
-		moreBaby = (GameObject)Instantiate(Resources.Load("Baby"), new Vector3(Player.transform.position.x + Random.Range( 40.0f, 90.0f ), Random.Range( 10.0f, 15f ), 0), Quaternion.identity);
+		moreBaby = (GameObject)Instantiate(Resources.Load("Baby"), new Vector3(Player.transform.position.x + Random.Range( 20.0f, 120.0f ), Random.Range( 10.0f, 15f ), 0), Quaternion.identity);
 		Rigidbody2D rb = moreBaby.GetComponent<Rigidbody2D>();
 
 		rb.AddForce(Random.Range( .1f, .9f ) * Vector3.down);
 		transform.Rotate(Vector3.right * 2f);
+		IEnumerator timeTillDestroy;
+		timeTillDestroy = lateDestroy ();
+		StartCoroutine (timeTillDestroy);
 
+	}
+
+	public IEnumerator lateDestroy() {
+		yield return new WaitForSeconds(5.0f);
+		Destroy(gameObject);
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
@@ -50,6 +58,7 @@ public class BabyController : MonoBehaviour {
 			if (pScript.crazedHarambe) {
 				pScript.crazedHarambe = false;
 				SpriteRenderer.sprite = sprite2;
+				Destroy (gameObject);
 			} else {
 				Destroy (gameObject);
 			}
