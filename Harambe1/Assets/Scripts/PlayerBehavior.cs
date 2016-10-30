@@ -42,6 +42,12 @@ public class PlayerBehavior : MonoBehaviour {
 
 	private SpriteRenderer HealthSpriteRenderer;
 
+	private int count;
+
+	public Text countText;
+
+	private IEnumerator scoreCoroutine;
+
 
 	// Use this for initialization
 	void Start () {
@@ -50,6 +56,12 @@ public class PlayerBehavior : MonoBehaviour {
 
 		GameObject Health = GameObject.Find("Health");
 		HealthSpriteRenderer = Health.GetComponent<SpriteRenderer>();
+
+		count = 0;
+		countText.text = count.ToString();
+
+		scoreCoroutine = incrementScore ();
+		StartCoroutine (scoreCoroutine);
 
 
 
@@ -71,6 +83,15 @@ public class PlayerBehavior : MonoBehaviour {
 		jump();
 		dash ();
 
+
+	}
+
+	public IEnumerator incrementScore () {
+		while (true) {
+			yield return new WaitForSeconds (1f);
+			count += 1;
+			countText.text = count.ToString ();
+		}
 
 	}
 
@@ -149,7 +170,8 @@ public class PlayerBehavior : MonoBehaviour {
 				hitRegistered = true;
 			}
 			else {
-				//crazedHarambe = false;
+				count += 10;
+				countText.text = count.ToString();
 				Time.timeScale = 1;
 
 			}

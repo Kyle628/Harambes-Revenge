@@ -3,9 +3,8 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.20506</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
     <ProjectGuid>{A6F9F951-C30D-B2F8-A3C6-449908E7DBC2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -34,34 +33,34 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.XML" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\..\..\Applications\Unity\Unity.app\Contents\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.dll</HintPath>
+      <HintPath>..\..\..\..\..\Applications\Unity\Unity.app\Contents\Managed\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\LastDistance.cs" />
-     <Compile Include="Assets\Scripts\BabyController.cs" />
-     <Compile Include="Assets\Scripts\BushController.cs" />
-     <Compile Include="Assets\Scripts\GameController.cs" />
-     <Compile Include="Assets\Scripts\GroundShiz.cs" />
-     <Compile Include="Assets\Scripts\PlayerBehavior.cs" />
-     <Compile Include="Assets\Scripts\Scroll.cs" />
-     <Compile Include="Assets\Scripts\SkyScraperController.cs" />
-     <Compile Include="Assets\Scripts\TranqController.cs" />
-     <Compile Include="Assets\Scripts\churros.cs" />
-     <Compile Include="Assets\Scripts\startGame.cs" />
- <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Networking">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
+    <Compile Include="Assets\LastDistance.cs" />
+    <Compile Include="Assets\Scripts\BabyController.cs" />
+    <Compile Include="Assets\Scripts\BushController.cs" />
+    <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\GroundShiz.cs" />
+    <Compile Include="Assets\Scripts\PlayerBehavior.cs" />
+    <Compile Include="Assets\Scripts\Scroll.cs" />
+    <Compile Include="Assets\Scripts\SkyScraperController.cs" />
+    <Compile Include="Assets\Scripts\TranqController.cs" />
+    <Compile Include="Assets\Scripts\churros.cs" />
+    <Compile Include="Assets\Scripts\startGame.cs" />
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\..\..\Applications\Unity\Unity.app\Contents\UnityExtensions\Unity\GUISystem\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>..\..\..\..\..\Applications\Unity\Unity.app\Contents\UnityExtensions\Unity\Networking\UnityEngine.Networking.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -71,5 +70,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
 </Project>
