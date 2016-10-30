@@ -22,7 +22,7 @@ public class TranqController : MonoBehaviour {
 	private IEnumerator SpawnTranq()
 	{
 		GameObject Player = GameObject.Find("gorilla");
-			yield return new WaitForSeconds(Random.Range(1.0f, 2.0f));
+			yield return new WaitForSeconds(Random.Range(10.0f, 15.0f));
 			moreTranq = (GameObject)Instantiate(Resources.Load("Tranq"), new Vector3(Player.transform.position.x + Random.Range( 20.0f, 35.0f ), 4.0f, 0), Quaternion.identity);
 			//Rigidbody2D rb = moreTranq.GetComponent<Rigidbody2D>();
 

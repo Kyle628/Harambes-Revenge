@@ -11,7 +11,7 @@ public class BushController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		coroutine = SpawnBush();
-		StartCoroutine(coroutine);	
+		StartCoroutine(coroutine);
 	}
 	
 	// Update is called once per frame

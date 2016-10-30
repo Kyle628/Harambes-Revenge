@@ -19,10 +19,13 @@ public class PlayerBehavior : MonoBehaviour {
 
 	public float speed = 10;
 	public float maxSpeed = 2;
-	public float jumpForce = 600f;
+	public float jumpForce = 1000f;
 	public float rotateSpeed = 1000;
 	public bool grounded = true;
 	public bool doubleJump = false;
+
+	public bool hasDashedRecently = false;
+
 	private SpriteRenderer SpriteRenderer;
 	private int frame = 0;
 	public Vector3 downForce;
@@ -34,6 +37,8 @@ public class PlayerBehavior : MonoBehaviour {
 	public Rigidbody2D rb;
 
 	public bool gameOver = false;
+
+	bool hitRegistered = true;
 
 	private SpriteRenderer HealthSpriteRenderer;
 
@@ -93,7 +98,7 @@ public class PlayerBehavior : MonoBehaviour {
 	}
 
 	void dash() {
-		if (Input.GetButtonDown ("Dash")) {
+		if (Input.GetButtonDown ("Dash") && !hasDashedRecently) {
 			dashing = true;
 			coroutine = doDash();
 			StartCoroutine(coroutine);
@@ -101,9 +106,18 @@ public class PlayerBehavior : MonoBehaviour {
 	}
 
 	private IEnumerator doDash(){
+		hasDashedRecently = true;
 		speed = 50.0f;
 		yield return new WaitForSeconds (.2f);
 		speed = 15.0f;
+		IEnumerator dashRoutine;
+		dashRoutine = waitToDash ();
+		StartCoroutine (dashRoutine);
+	}
+
+	public IEnumerator waitToDash () {
+		yield return new WaitForSeconds (5f);
+		hasDashedRecently = false;
 	}
 
 
@@ -118,7 +132,9 @@ public class PlayerBehavior : MonoBehaviour {
 		}
 
 		if (other.tag == "Baby") {
-			if (!crazedHarambe) {
+			
+			if (!crazedHarambe && hitRegistered) {
+				hitRegistered = false;
 				shouldBlink = true;
 				SpriteRenderer.color = Color.red;
 				health -= 10;
@@ -130,6 +146,7 @@ public class PlayerBehavior : MonoBehaviour {
 				if (health <= 0) {
 					gameOver = true;
 				}
+				hitRegistered = true;
 			}
 			else {
 				//crazedHarambe = false;
@@ -140,7 +157,6 @@ public class PlayerBehavior : MonoBehaviour {
 		}
 
 		if (other.tag == "Tranq") {
-			Debug.Log ("harambe down");
 			Time.timeScale = 2;
 			crazedHarambe = true;
 
